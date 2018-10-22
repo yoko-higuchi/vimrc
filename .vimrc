@@ -1,6 +1,5 @@
 " 行番号を表示
 set number
-
 " ファイルを上書きする前にバックアップを作ることを無効化
 set nowritebackup
 " ファイルを上書きする前にバックアップを作ることを無効化
@@ -28,7 +27,6 @@ set incsearch
 " 検索結果をハイライト表示
 set hlsearch
 
-
 "----------------------------------------
 " 表示設定
 "----------------------------------------
@@ -44,8 +42,6 @@ set showmatch matchtime=1
 set cmdheight=2
 " ステータス行を常に表示
 set laststatus=2
-
-
 " ウィンドウの右下にまだ実行していない入力中のコマンドを表示
 set showcmd
 " 省略されずに表示
@@ -85,6 +81,22 @@ set noswapfile
 set nofoldenable
 " タイトルを表示
 set title
+
+"----------------------------------------
+" terminal 設定
+"----------------------------------------
+" terminal を開くと自動で job モードに入る
+if has('nvim')
+  " Neovim 用
+  autocmd WinEnter * if &buftype ==# 'terminal' | startinsert | endif
+else
+  " Vim 用
+  autocmd WinEnter * if &buftype ==# 'terminal' | normal i | endif
+endif
+
+" job モードから normal モードに変更 (デフォは C-\ C-n)
+tnoremap <C-[> <C-\><C-n>
+
 
 
 " ヤンクでクリップボードにコピー
